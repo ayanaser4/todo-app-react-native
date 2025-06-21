@@ -17,6 +17,12 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
+  placeholder: {
+    color: "#aeaeae",
+  },
+  TextInput: {
+    color: "#000",
+  },
 
   submitBtn: {
     width: "50%",
@@ -28,7 +34,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    color: "white",
+    color: "#fff",
     fontSize: 18,
     textTransform: "uppercase",
     fontWeight: "bold",
@@ -89,9 +95,9 @@ export const styles = StyleSheet.create({
   },
 
   todoItem: {
-    flexDirection: "row", // ⬅️ Make row layout
-    alignItems: "center", // ⬅️ Center vertically
-    justifyContent: "space-between", // ⬅️ Space between title and icon
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
@@ -101,9 +107,15 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
 
+  iconGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   todoTitle: {
-    fontSize: 16,
+    fontSize: 24,
     color: "#333",
+    fontWeight: "bold",
   },
   doneTodo: {
     textDecorationLine: "line-through",

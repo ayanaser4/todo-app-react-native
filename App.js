@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import TodoApp from "./todo.js";
+import TodoApp from "./src/components/todoApp.js";
 
 export default function App() {
   return (
