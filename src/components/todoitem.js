@@ -6,7 +6,7 @@ import { styles } from "./styles.js";
 import { useNavigation } from "@react-navigation/native";
 import { Paths } from "../routes/path.js";
 import { useDispatch } from "react-redux";
-import { deleteTask, toggleTaskComplete } from "../pages/taskSlice.js"; // ✅ adjust path
+import { deleteTask, toggleTaskComplete } from "../pages/taskSlice.js";
 
 const TodoItem = ({ todo }) => {
   const navigation = useNavigation();

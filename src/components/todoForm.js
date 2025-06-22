@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles.js";
 import { useDispatch } from "react-redux";
-import { addTask } from "../pages/taskSlice"; // ✅ adjust path as needed
+import { addTask } from "../pages/taskSlice"; 
 
 const TodoForm = () => {
   const [title, setTitle] = useState("");
@@ -17,7 +17,7 @@ const TodoForm = () => {
       description,
       completed: false,
     };
-    dispatch(addTask(todo)); // ✅ Redux action
+    dispatch(addTask(todo));
     setTitle("");
     setDescription("");
   };

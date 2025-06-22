@@ -2,8 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const taskSlice = createSlice({
-  name: "tasks",                // ← This becomes the key in state: `state.tasks`
-  initialState: [],            // ← This is the array of todos
+  name: "tasks",              
+  initialState: [],            
   reducers: {
     setTasks: (state, action) => action.payload,
     addTask: (state, action) => { state.push(action.payload); },
