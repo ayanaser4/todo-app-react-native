@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import TodoItem from "./todoitem";
 
 const Todos = ({ todos, setTodos, filter }) => {
@@ -33,9 +33,11 @@ const Todos = ({ todos, setTodos, filter }) => {
           />
         ))
       ) : (
+        <View>
         <Text style={{ textAlign: "center", color: "#999", marginTop: 20 }}>
           No tasks found.
         </Text>
+        </View>
       )}
     </ScrollView>
   );
