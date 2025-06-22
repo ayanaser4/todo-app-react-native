@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Platform } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "../components/styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import TodoForm from "../components/todoForm.js";
