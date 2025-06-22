@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { styles } from "../components/styles"; // Adjust path as needed
+import { styles } from "../components/styles";
 
 export default function Details() {
   const route = useRoute();

@@ -1,45 +1,46 @@
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { styles } from "../components/styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import TodoForm from "../components/todoForm.js";
-import { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView } from "react-native";
 import Todos from "../components/todos.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setTasks } from "./taskSlice";
+
 export default function Home() {
-  const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("all");
-
-
-  const handleAddtodo = (todo) => {
-    const newTodo = { ...todo, id: Date.now(), completed: false };
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-  };
+  const tasks = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
 
   const STORAGE_KEY = "@todos";
 
+  // Load from AsyncStorage once
   useEffect(() => {
-    const loadTodos = async () => {
+    const loadTasks = async () => {
       try {
         const stored = await AsyncStorage.getItem(STORAGE_KEY);
-        if (stored) setTodos(JSON.parse(stored));
+        if (stored) {
+          dispatch(setTasks(JSON.parse(stored)));
+        }
       } catch (e) {
         console.error("Load error:", e);
       }
     };
-    loadTodos();
+    loadTasks();
   }, []);
 
+  // Save to AsyncStorage on tasks change
   useEffect(() => {
-    const saveTodos = async () => {
+    const saveTasks = async () => {
       try {
-        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
       } catch (e) {
         console.error("Save error:", e);
       }
     };
-    saveTodos();
-  }, [todos]);
+    saveTasks();
+  }, [tasks]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,68 +48,36 @@ export default function Home() {
         <Icon name="menu" size={30} color="#000" />
         <Text style={styles.textHeader}>Todo App</Text>
       </View>
-      {/* onsubmit make as props take data from form*/}
-      {/*}
-      <TodoForm
-        onSubmit={(todo) => setTodos((prevTodos) => [...prevTodos, todo])}
-      />*/}
-      <TodoForm onSubmit={handleAddtodo} />
+
+      <TodoForm />
       <View style={styles.dividerLine} />
+
       <View style={styles.filterContainer}>
-        <TouchableOpacity
-          style={[
-            styles.filterBtn,
-            filter === "all" ? { backgroundColor: "#000" } : {},
-          ]}
-          onPress={() => setFilter("all")}
-        >
-          <Text
+        {["all", "completed", "inProgress"].map((status) => (
+          <TouchableOpacity
+            key={status}
             style={[
-              styles.filterText,
-              filter === "all" ? { color: "#fff" } : {},
+              styles.filterBtn,
+              filter === status && styles.activeFilterBtn,
             ]}
+            onPress={() => setFilter(status)}
           >
-            All
-          </Text>
-        </TouchableOpacity>{" "}
-        {/*onPress={() =>dispatch({...StackActions.replace(Paths.Completed_task)})} */}
-        <TouchableOpacity
-          style={[
-            styles.filterBtn,
-            filter === "completed" && { backgroundColor: "#000" },
-          ]}
-          onPress={() => setFilter("completed")}
-        >
-          <Text
-            style={[
-              styles.filterText,
-              filter === "completed" && { color: "#fff" },
-            ]}
-          >
-            Completed
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.filterBtn,
-            filter === "inProgress" && { backgroundColor: "#000" },
-          ]}
-          onPress={() => setFilter("inProgress")}
-        >
-          <Text
-            style={[
-              styles.filterText,
-              filter === "inProgress" && { color: "#fff" },
-            ]}
-          >
-            In progress
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.filterText,
+                filter === status && styles.activeFilterText,
+              ]}
+            >
+              {status === "inProgress" ? "In Progress" : status[0].toUpperCase() + status.slice(1)}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
+
       <View style={styles.dividerLine} />
       <View style={styles.todosContainer}>
         <ScrollView>
-          <Todos todos={todos} setTodos={setTodos} filter={filter} />
+          <Todos filter={filter} />
         </ScrollView>
       </View>
     </SafeAreaView>

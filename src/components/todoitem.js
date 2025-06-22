@@ -5,12 +5,14 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { styles } from "./styles.js";
 import { useNavigation } from "@react-navigation/native";
 import { Paths } from "../routes/path.js";
+import { useDispatch } from "react-redux";
+import { deleteTask, toggleTaskComplete } from "../pages/taskSlice.js"; // ✅ adjust path
 
-
-const TodoItem = ({ todo, onDelete, onToggleComplete }) => {
+const TodoItem = ({ todo }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   return (
-    <View>
     <TouchableOpacity
       onPress={() =>
         navigation.navigate(Paths.Details, {
@@ -33,8 +35,7 @@ const TodoItem = ({ todo, onDelete, onToggleComplete }) => {
         </Text>
 
         <View style={styles.iconGroup}>
-          {/* Delete */}
-          <TouchableOpacity onPress={() => onDelete(todo.id)}>
+          <TouchableOpacity onPress={() => dispatch(deleteTask(todo.id))}>
             <MaterialIcons
               name="delete"
               size={24}
@@ -43,8 +44,7 @@ const TodoItem = ({ todo, onDelete, onToggleComplete }) => {
             />
           </TouchableOpacity>
 
-          {/* Checkbox */}
-          <TouchableOpacity onPress={onToggleComplete}>
+          <TouchableOpacity onPress={() => dispatch(toggleTaskComplete(todo.id))}>
             <Ionicons
               name={todo.completed ? "checkbox" : "square-outline"}
               size={24}
@@ -54,7 +54,6 @@ const TodoItem = ({ todo, onDelete, onToggleComplete }) => {
         </View>
       </View>
     </TouchableOpacity>
-    </View>
   );
 };
 

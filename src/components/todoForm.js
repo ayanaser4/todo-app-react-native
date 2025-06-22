@@ -1,41 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles.js";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../pages/taskSlice"; // ✅ adjust path as needed
 
-const TodoForm = ({ onSubmit }) => {
-  //create two state for title and description to get data from input
+const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  //handle submit to create object from id and title and description
+  const dispatch = useDispatch();
+
   const handleSubmit = () => {
-    if(!title) return;
+    if (!title) return;
     const todo = {
-      id: Math.floor(Math.random() * 1000),
+      id: Date.now(),
       title,
       description,
       completed: false,
     };
-    //create object and pass to onSubmit
-    onSubmit(todo);
+    dispatch(addTask(todo)); // ✅ Redux action
     setTitle("");
     setDescription("");
   };
+
   return (
     <>
       <TextInput
-        onChangeText={(val) => setTitle(val)}
+        onChangeText={setTitle}
         placeholder="Enter title"
         style={{ ...styles.input, ...styles.placeholder, ...styles.TextInput }}
         value={title}
       />
       <TextInput
-        onChangeText={(val) => setDescription(val)}
+        onChangeText={setDescription}
         placeholder="Enter description"
         style={{ ...styles.input, ...styles.placeholder, ...styles.TextInput }}
         value={description}
       />
-      <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit} >
+      <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
         <Text style={styles.text}>Save</Text>
       </TouchableOpacity>
     </>
