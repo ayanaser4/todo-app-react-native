@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import TodoItem from "./todoitem";
 
 const Todos = ({ todos, setTodos, filter }) => {
@@ -22,7 +22,7 @@ const Todos = ({ todos, setTodos, filter }) => {
   });
 
   return (
-    <View>
+    <ScrollView style={{ paddingHorizontal: 10 }}>
       {filtered.length > 0 ? (
         filtered.map((todo) => (
           <TodoItem
@@ -37,7 +37,7 @@ const Todos = ({ todos, setTodos, filter }) => {
           No tasks found.
         </Text>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
