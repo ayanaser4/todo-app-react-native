@@ -120,4 +120,59 @@ export const styles = StyleSheet.create({
   doneTodo: {
     textDecorationLine: "line-through",
   },
+
+  detailsContainer: {
+    flex: 1,
+    backgroundColor: "#f2f2f2",
+    padding: 20,
+    alignItems: "center", // ⬅️ centers horizontally
+    justifyContent: "center", // ⬅️ centers vertically
+  },
+
+  detailsCard: {
+    backgroundColor: "#fff",
+    width: "100%",
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3, // Android shadow
+  },
+
+  detailsHeading: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#222",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+
+  detailsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+
+  detailsLabel: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#555",
+    width: "40%",
+  },
+
+  detailsValue: {
+    fontSize: 16,
+    color: "#000",
+    width: "60%",
+    textAlign: "right",
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: "#e0e0e0",
+    marginVertical: 12,
+    width: "100%",
+  },
 });

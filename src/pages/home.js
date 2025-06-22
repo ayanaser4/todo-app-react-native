@@ -6,11 +6,7 @@ import { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView } from "react-native";
 import Todos from "../components/todos.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import { Paths } from "../routes/path";
-import Details from "./details.js";
 export default function Home() {
-  const { navigate } = useNavigation();
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("all");
 

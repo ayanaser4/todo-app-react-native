@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Completedtask from "../pages/completedtask";
 import StackNavigator from "./stacknavigator";
 import { Paths } from "./path";
+import Details from "../pages/details";
 
 const Tab = createBottomTabNavigator();
 
