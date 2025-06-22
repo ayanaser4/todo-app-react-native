@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { styles } from "./styles.js";
 
-const TodoItem = ({ todo, onDelete }) => {
-  const [isStriked, setIsStriked] = useState(false);
 
+const TodoItem = ({ todo, onDelete, onToggleComplete }) => {
   return (
     <View style={styles.todoItem}>
       <Text
         style={[
           styles.todoTitle,
-          isStriked && { textDecorationLine: "underline", color: "#999" },
+          todo.completed && { textDecorationLine: "underline", color: "#999" },
         ]}
       >
         {todo.title}
       </Text>
 
       <View style={styles.iconGroup}>
-        {/* 🗑️ Delete Task */}
+        {/* Delete */}
         <TouchableOpacity onPress={() => onDelete(todo.id)}>
           <MaterialIcons
             name="delete"
@@ -29,12 +28,12 @@ const TodoItem = ({ todo, onDelete }) => {
           />
         </TouchableOpacity>
 
-        {/* ✅ Checkbox strike-through */}
-        <TouchableOpacity onPress={() => setIsStriked(!isStriked)}>
+        {/* Checkbox */}
+        <TouchableOpacity onPress={onToggleComplete}>
           <Ionicons
-            name={isStriked ? "checkbox" : "square-outline"}
+            name={todo.completed ? "checkbox" : "square-outline"}
             size={24}
-            color={isStriked ? "green" : "gray"}
+            color={todo.completed ? "green" : "gray"}
           />
         </TouchableOpacity>
       </View>

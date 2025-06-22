@@ -1,10 +1,11 @@
+import React from "react";
 import { View } from "react-native";
-import TodoApp from "./src/components/todoApp.js";
+import Router from "./src/routes/router";
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <TodoApp />
+      <Router />
     </View>
   );
 }
